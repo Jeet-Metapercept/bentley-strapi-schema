@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_success_stories_quotes",
+  "info": {
+    "name": "Quote",
+    "icon": "align-left",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "imageURL": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "integer",
+      "default": 5,
+      "min": 1,
+      "max": 5
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}

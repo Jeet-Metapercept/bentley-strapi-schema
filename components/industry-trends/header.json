@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_industry_trends_headers",
+  "info": {
+    "name": "Banner",
+    "icon": "heading",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "name": "Testimonial",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "targetField": "software"
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 20
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "updatedBy": {
+      "type": "email",
+      "required": true
+    },
+    "designation": {
+      "type": "string"
+    },
+    "publishDate": {
+      "type": "date"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string"
+    },
+    "software": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string",
+      "default": "https://i.pravatar.cc/150"
+    },
+    "rating": {
+      "type": "integer",
+      "max": 5,
+      "min": 1,
+      "default": 5
+    }
+  }
+}
