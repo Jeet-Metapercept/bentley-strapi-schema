@@ -1,8 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "interviews",
+  "collectionName": "success_stories",
   "info": {
-    "name": "Interviews"
+    "name": "Success-Stories",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -10,23 +11,16 @@
     "draftAndPublish": true
   },
   "attributes": {
+    "quote": {
+      "type": "component",
+      "repeatable": true,
+      "component": "success-stories.quote"
+    },
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "targetField": "stream"
     },
-    "stream": {
-      "type": "string"
-    },
-    "banner": {
-      "type": "component",
-      "repeatable": false,
-      "component": "interviews.banner"
-    },
-    "media": {
-      "type": "component",
-      "repeatable": false,
-      "component": "interviews.media"
-    },
-    "expert": {
+    "profile": {
       "type": "component",
       "repeatable": false,
       "component": "common.profile"
@@ -35,6 +29,9 @@
       "type": "component",
       "repeatable": false,
       "component": "common.schedule"
+    },
+    "stream": {
+      "type": "string"
     }
   }
 }
