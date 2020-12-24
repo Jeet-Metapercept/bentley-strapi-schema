@@ -1,8 +1,8 @@
 {
-  "collectionName": "components_interviews_banners",
+  "collectionName": "components_industry_trends_headers",
   "info": {
-    "name": "banner",
-    "icon": "address-card",
+    "name": "Banner",
+    "icon": "heading",
     "description": ""
   },
   "options": {},
@@ -12,9 +12,6 @@
     },
     "content": {
       "type": "text"
-    },
-    "link": {
-      "type": "string"
     }
   }
 }

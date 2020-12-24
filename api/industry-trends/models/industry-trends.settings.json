@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "industry_trends",
   "info": {
-    "name": "Industry-Trends"
+    "name": "Industry-Trends",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -36,6 +37,11 @@
       "type": "component",
       "repeatable": false,
       "component": "common.schedule"
+    },
+    "actions": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.actions"
     }
   }
 }

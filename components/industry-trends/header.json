@@ -12,6 +12,9 @@
     },
     "content": {
       "type": "text"
+    },
+    "link": {
+      "type": "string"
     }
   }
 }

@@ -32,11 +32,6 @@
     },
     "stream": {
       "type": "string"
-    },
-    "actions": {
-      "type": "component",
-      "repeatable": false,
-      "component": "common.actions"
     }
   }
 }

@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "interviews",
+  "collectionName": "social_communities",
   "info": {
-    "name": "Interviews",
+    "name": "Social-Communities",
     "description": ""
   },
   "options": {
@@ -12,25 +12,23 @@
   },
   "attributes": {
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "targetField": "title"
     },
-    "stream": {
+    "title": {
       "type": "string"
     },
-    "banner": {
-      "type": "component",
-      "repeatable": false,
-      "component": "interviews.banner"
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "link": {
+      "type": "string"
     },
     "media": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "interviews.media"
-    },
-    "expert": {
-      "type": "component",
-      "repeatable": false,
-      "component": "common.profile"
     },
     "schedule": {
       "type": "component",

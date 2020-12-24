@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_interviews_media",
+  "info": {
+    "name": "media",
+    "icon": "bullhorn"
+  },
+  "options": {},
+  "attributes": {
+    "imageURL": {
+      "type": "string"
+    },
+    "videoURL": {
+      "type": "string"
+    }
+  }
+}
