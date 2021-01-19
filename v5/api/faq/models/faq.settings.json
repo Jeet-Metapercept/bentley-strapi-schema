@@ -2,8 +2,7 @@
   "kind": "collectionType",
   "collectionName": "faqs",
   "info": {
-    "name": "FAQ",
-    "description": ""
+    "name": "FAQ"
   },
   "options": {
     "increments": true,
@@ -33,10 +32,7 @@
         "certification",
         "dashboard",
         "compliances",
-        "support",
-        "connected",
-        "software",
-        "training"
+        "support"
       ]
     },
     "question": {
