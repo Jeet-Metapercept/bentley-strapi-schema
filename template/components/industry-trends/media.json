@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_industry_trends_media",
+  "info": {
+    "name": "Media",
+    "icon": "photo-video",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "imageURL": {
+      "type": "string"
+    },
+    "videoURL": {
+      "type": "string"
+    }
+  }
+}
