@@ -1,0 +1,2003 @@
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+enum ENUM_ANNOUNCEMENT_LANG {
+  en
+  fr
+  in
+}
+
+type Announcement {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  description: String
+  startDate: Date!
+  endDate: Date!
+  isImportant: Boolean
+  isStarred: Boolean
+  isCompleted: Boolean
+  isTrashed: Boolean
+  lang: ENUM_ANNOUNCEMENT_LANG
+  title: String!
+  published_at: DateTime
+  tags(sort: String, limit: Int, start: Int, where: JSON): [AnnouncementsTags]
+}
+
+type AnnouncementConnection {
+  values: [Announcement]
+  groupBy: AnnouncementGroupBy
+  aggregate: AnnouncementAggregator
+}
+
+type AnnouncementAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type AnnouncementGroupBy {
+  id: [AnnouncementConnectionId]
+  created_at: [AnnouncementConnectionCreated_at]
+  updated_at: [AnnouncementConnectionUpdated_at]
+  description: [AnnouncementConnectionDescription]
+  startDate: [AnnouncementConnectionStartDate]
+  endDate: [AnnouncementConnectionEndDate]
+  isImportant: [AnnouncementConnectionIsImportant]
+  isStarred: [AnnouncementConnectionIsStarred]
+  isCompleted: [AnnouncementConnectionIsCompleted]
+  isTrashed: [AnnouncementConnectionIsTrashed]
+  lang: [AnnouncementConnectionLang]
+  title: [AnnouncementConnectionTitle]
+  published_at: [AnnouncementConnectionPublished_at]
+}
+
+type AnnouncementConnectionId {
+  key: ID
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionCreated_at {
+  key: DateTime
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionUpdated_at {
+  key: DateTime
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionDescription {
+  key: String
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionStartDate {
+  key: ID
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionEndDate {
+  key: ID
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionIsImportant {
+  key: Boolean
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionIsStarred {
+  key: Boolean
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionIsCompleted {
+  key: Boolean
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionIsTrashed {
+  key: Boolean
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionLang {
+  key: String
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionTitle {
+  key: String
+  connection: AnnouncementConnection
+}
+
+type AnnouncementConnectionPublished_at {
+  key: DateTime
+  connection: AnnouncementConnection
+}
+
+input AnnouncementInput {
+  description: String
+  startDate: Date!
+  endDate: Date!
+  isImportant: Boolean
+  isStarred: Boolean
+  isCompleted: Boolean
+  isTrashed: Boolean
+  tags: [ID]
+  lang: ENUM_ANNOUNCEMENT_LANG
+  title: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editAnnouncementInput {
+  description: String
+  startDate: Date
+  endDate: Date
+  isImportant: Boolean
+  isStarred: Boolean
+  isCompleted: Boolean
+  isTrashed: Boolean
+  tags: [ID]
+  lang: ENUM_ANNOUNCEMENT_LANG
+  title: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createAnnouncementInput {
+  data: AnnouncementInput
+}
+
+type createAnnouncementPayload {
+  announcement: Announcement
+}
+
+input updateAnnouncementInput {
+  where: InputID
+  data: editAnnouncementInput
+}
+
+type updateAnnouncementPayload {
+  announcement: Announcement
+}
+
+input deleteAnnouncementInput {
+  where: InputID
+}
+
+type deleteAnnouncementPayload {
+  announcement: Announcement
+}
+
+enum ENUM_ANNOUNCEMENTSTAGS_TEXT {
+  Frontend
+  Backend
+  Doc
+  Bug
+}
+
+enum ENUM_ANNOUNCEMENTSTAGS_VALUE {
+  frontend
+  backend
+  doc
+  bug
+}
+
+enum ENUM_ANNOUNCEMENTSTAGS_COLOR {
+  primary
+  warning
+  success
+  danger
+}
+
+type AnnouncementsTags {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  text: ENUM_ANNOUNCEMENTSTAGS_TEXT!
+  value: ENUM_ANNOUNCEMENTSTAGS_VALUE!
+  color: ENUM_ANNOUNCEMENTSTAGS_COLOR!
+}
+
+type AnnouncementsTagsConnection {
+  values: [AnnouncementsTags]
+  groupBy: AnnouncementsTagsGroupBy
+  aggregate: AnnouncementsTagsAggregator
+}
+
+type AnnouncementsTagsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type AnnouncementsTagsGroupBy {
+  id: [AnnouncementsTagsConnectionId]
+  created_at: [AnnouncementsTagsConnectionCreated_at]
+  updated_at: [AnnouncementsTagsConnectionUpdated_at]
+  text: [AnnouncementsTagsConnectionText]
+  value: [AnnouncementsTagsConnectionValue]
+  color: [AnnouncementsTagsConnectionColor]
+}
+
+type AnnouncementsTagsConnectionId {
+  key: ID
+  connection: AnnouncementsTagsConnection
+}
+
+type AnnouncementsTagsConnectionCreated_at {
+  key: DateTime
+  connection: AnnouncementsTagsConnection
+}
+
+type AnnouncementsTagsConnectionUpdated_at {
+  key: DateTime
+  connection: AnnouncementsTagsConnection
+}
+
+type AnnouncementsTagsConnectionText {
+  key: String
+  connection: AnnouncementsTagsConnection
+}
+
+type AnnouncementsTagsConnectionValue {
+  key: String
+  connection: AnnouncementsTagsConnection
+}
+
+type AnnouncementsTagsConnectionColor {
+  key: String
+  connection: AnnouncementsTagsConnection
+}
+
+input AnnouncementsTagInput {
+  text: ENUM_ANNOUNCEMENTSTAGS_TEXT!
+  value: ENUM_ANNOUNCEMENTSTAGS_VALUE!
+  color: ENUM_ANNOUNCEMENTSTAGS_COLOR!
+  created_by: ID
+  updated_by: ID
+}
+
+input editAnnouncementsTagInput {
+  text: ENUM_ANNOUNCEMENTSTAGS_TEXT
+  value: ENUM_ANNOUNCEMENTSTAGS_VALUE
+  color: ENUM_ANNOUNCEMENTSTAGS_COLOR
+  created_by: ID
+  updated_by: ID
+}
+
+input createAnnouncementsTagInput {
+  data: AnnouncementsTagInput
+}
+
+type createAnnouncementsTagPayload {
+  announcementsTag: AnnouncementsTags
+}
+
+input updateAnnouncementsTagInput {
+  where: InputID
+  data: editAnnouncementsTagInput
+}
+
+type updateAnnouncementsTagPayload {
+  announcementsTag: AnnouncementsTags
+}
+
+input deleteAnnouncementsTagInput {
+  where: InputID
+}
+
+type deleteAnnouncementsTagPayload {
+  announcementsTag: AnnouncementsTags
+}
+
+enum ENUM_FAQ_CATEGORY {
+  general
+  licensing
+  communities
+  learning
+  certification
+  dashboard
+  compliances
+  support
+  connected
+  software
+  training
+}
+
+type Faq {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  slug: String
+  context: String
+  type: String
+  category: ENUM_FAQ_CATEGORY
+  question: String!
+  acceptedAnswer: String!
+  published_at: DateTime
+}
+
+type FaqConnection {
+  values: [Faq]
+  groupBy: FaqGroupBy
+  aggregate: FaqAggregator
+}
+
+type FaqAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type FaqGroupBy {
+  id: [FaqConnectionId]
+  created_at: [FaqConnectionCreated_at]
+  updated_at: [FaqConnectionUpdated_at]
+  slug: [FaqConnectionSlug]
+  context: [FaqConnectionContext]
+  type: [FaqConnectionType]
+  category: [FaqConnectionCategory]
+  question: [FaqConnectionQuestion]
+  acceptedAnswer: [FaqConnectionAcceptedAnswer]
+  published_at: [FaqConnectionPublished_at]
+}
+
+type FaqConnectionId {
+  key: ID
+  connection: FaqConnection
+}
+
+type FaqConnectionCreated_at {
+  key: DateTime
+  connection: FaqConnection
+}
+
+type FaqConnectionUpdated_at {
+  key: DateTime
+  connection: FaqConnection
+}
+
+type FaqConnectionSlug {
+  key: String
+  connection: FaqConnection
+}
+
+type FaqConnectionContext {
+  key: String
+  connection: FaqConnection
+}
+
+type FaqConnectionType {
+  key: String
+  connection: FaqConnection
+}
+
+type FaqConnectionCategory {
+  key: String
+  connection: FaqConnection
+}
+
+type FaqConnectionQuestion {
+  key: String
+  connection: FaqConnection
+}
+
+type FaqConnectionAcceptedAnswer {
+  key: String
+  connection: FaqConnection
+}
+
+type FaqConnectionPublished_at {
+  key: DateTime
+  connection: FaqConnection
+}
+
+input FaqInput {
+  slug: String
+  context: String
+  type: String
+  category: ENUM_FAQ_CATEGORY
+  question: String!
+  acceptedAnswer: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editFaqInput {
+  slug: String
+  context: String
+  type: String
+  category: ENUM_FAQ_CATEGORY
+  question: String
+  acceptedAnswer: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createFaqInput {
+  data: FaqInput
+}
+
+type createFaqPayload {
+  faq: Faq
+}
+
+input updateFaqInput {
+  where: InputID
+  data: editFaqInput
+}
+
+type updateFaqPayload {
+  faq: Faq
+}
+
+input deleteFaqInput {
+  where: InputID
+}
+
+type deleteFaqPayload {
+  faq: Faq
+}
+
+type IndustryTrends {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  slug: String
+  stream: String
+  profile: ComponentCommonProfile
+  banner: ComponentIndustryTrendsHeader
+  media: [ComponentIndustryTrendsMedia]
+  schedule: ComponentCommonSchedule
+  actions: ComponentCommonActions
+  published_at: DateTime
+}
+
+type IndustryTrendsConnection {
+  values: [IndustryTrends]
+  groupBy: IndustryTrendsGroupBy
+  aggregate: IndustryTrendsAggregator
+}
+
+type IndustryTrendsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type IndustryTrendsGroupBy {
+  id: [IndustryTrendsConnectionId]
+  created_at: [IndustryTrendsConnectionCreated_at]
+  updated_at: [IndustryTrendsConnectionUpdated_at]
+  slug: [IndustryTrendsConnectionSlug]
+  stream: [IndustryTrendsConnectionStream]
+  profile: [IndustryTrendsConnectionProfile]
+  banner: [IndustryTrendsConnectionBanner]
+  schedule: [IndustryTrendsConnectionSchedule]
+  actions: [IndustryTrendsConnectionActions]
+  published_at: [IndustryTrendsConnectionPublished_at]
+}
+
+type IndustryTrendsConnectionId {
+  key: ID
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionCreated_at {
+  key: DateTime
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionUpdated_at {
+  key: DateTime
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionSlug {
+  key: String
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionStream {
+  key: String
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionProfile {
+  key: ID
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionBanner {
+  key: ID
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionSchedule {
+  key: ID
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionActions {
+  key: ID
+  connection: IndustryTrendsConnection
+}
+
+type IndustryTrendsConnectionPublished_at {
+  key: DateTime
+  connection: IndustryTrendsConnection
+}
+
+input IndustryTrendInput {
+  slug: String
+  stream: String
+  profile: ComponentCommonProfileInput
+  banner: ComponentIndustryTrendsHeaderInput
+  media: [ComponentIndustryTrendsMediaInput]
+  schedule: ComponentCommonScheduleInput
+  actions: ComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editIndustryTrendInput {
+  slug: String
+  stream: String
+  profile: editComponentCommonProfileInput
+  banner: editComponentIndustryTrendsHeaderInput
+  media: [editComponentIndustryTrendsMediaInput]
+  schedule: editComponentCommonScheduleInput
+  actions: editComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createIndustryTrendInput {
+  data: IndustryTrendInput
+}
+
+type createIndustryTrendPayload {
+  industryTrend: IndustryTrends
+}
+
+input updateIndustryTrendInput {
+  where: InputID
+  data: editIndustryTrendInput
+}
+
+type updateIndustryTrendPayload {
+  industryTrend: IndustryTrends
+}
+
+input deleteIndustryTrendInput {
+  where: InputID
+}
+
+type deleteIndustryTrendPayload {
+  industryTrend: IndustryTrends
+}
+
+type Interviews {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  slug: String
+  stream: String
+  banner: ComponentInterviewsBanner
+  media: ComponentInterviewsMedia
+  expert: ComponentCommonProfile
+  schedule: ComponentCommonSchedule
+  actions: ComponentCommonActions
+  published_at: DateTime
+}
+
+type InterviewsConnection {
+  values: [Interviews]
+  groupBy: InterviewsGroupBy
+  aggregate: InterviewsAggregator
+}
+
+type InterviewsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type InterviewsGroupBy {
+  id: [InterviewsConnectionId]
+  created_at: [InterviewsConnectionCreated_at]
+  updated_at: [InterviewsConnectionUpdated_at]
+  slug: [InterviewsConnectionSlug]
+  stream: [InterviewsConnectionStream]
+  banner: [InterviewsConnectionBanner]
+  media: [InterviewsConnectionMedia]
+  expert: [InterviewsConnectionExpert]
+  schedule: [InterviewsConnectionSchedule]
+  actions: [InterviewsConnectionActions]
+  published_at: [InterviewsConnectionPublished_at]
+}
+
+type InterviewsConnectionId {
+  key: ID
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionCreated_at {
+  key: DateTime
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionUpdated_at {
+  key: DateTime
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionSlug {
+  key: String
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionStream {
+  key: String
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionBanner {
+  key: ID
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionMedia {
+  key: ID
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionExpert {
+  key: ID
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionSchedule {
+  key: ID
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionActions {
+  key: ID
+  connection: InterviewsConnection
+}
+
+type InterviewsConnectionPublished_at {
+  key: DateTime
+  connection: InterviewsConnection
+}
+
+input InterviewInput {
+  slug: String
+  stream: String
+  banner: ComponentInterviewsBannerInput
+  media: ComponentInterviewsMediaInput
+  expert: ComponentCommonProfileInput
+  schedule: ComponentCommonScheduleInput
+  actions: ComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editInterviewInput {
+  slug: String
+  stream: String
+  banner: editComponentInterviewsBannerInput
+  media: editComponentInterviewsMediaInput
+  expert: editComponentCommonProfileInput
+  schedule: editComponentCommonScheduleInput
+  actions: editComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createInterviewInput {
+  data: InterviewInput
+}
+
+type createInterviewPayload {
+  interview: Interviews
+}
+
+input updateInterviewInput {
+  where: InputID
+  data: editInterviewInput
+}
+
+type updateInterviewPayload {
+  interview: Interviews
+}
+
+input deleteInterviewInput {
+  where: InputID
+}
+
+type deleteInterviewPayload {
+  interview: Interviews
+}
+
+type SocialCommunities {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  slug: String
+  title: String
+  text: String!
+  link: String
+  media: [ComponentInterviewsMedia]
+  schedule: ComponentCommonSchedule
+  actions: ComponentCommonActions
+  published_at: DateTime
+}
+
+type SocialCommunitiesConnection {
+  values: [SocialCommunities]
+  groupBy: SocialCommunitiesGroupBy
+  aggregate: SocialCommunitiesAggregator
+}
+
+type SocialCommunitiesAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type SocialCommunitiesGroupBy {
+  id: [SocialCommunitiesConnectionId]
+  created_at: [SocialCommunitiesConnectionCreated_at]
+  updated_at: [SocialCommunitiesConnectionUpdated_at]
+  slug: [SocialCommunitiesConnectionSlug]
+  title: [SocialCommunitiesConnectionTitle]
+  text: [SocialCommunitiesConnectionText]
+  link: [SocialCommunitiesConnectionLink]
+  schedule: [SocialCommunitiesConnectionSchedule]
+  actions: [SocialCommunitiesConnectionActions]
+  published_at: [SocialCommunitiesConnectionPublished_at]
+}
+
+type SocialCommunitiesConnectionId {
+  key: ID
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionCreated_at {
+  key: DateTime
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionUpdated_at {
+  key: DateTime
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionSlug {
+  key: String
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionTitle {
+  key: String
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionText {
+  key: String
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionLink {
+  key: String
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionSchedule {
+  key: ID
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionActions {
+  key: ID
+  connection: SocialCommunitiesConnection
+}
+
+type SocialCommunitiesConnectionPublished_at {
+  key: DateTime
+  connection: SocialCommunitiesConnection
+}
+
+input SocialCommunityInput {
+  slug: String
+  title: String
+  text: String!
+  link: String
+  media: [ComponentInterviewsMediaInput]
+  schedule: ComponentCommonScheduleInput
+  actions: ComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editSocialCommunityInput {
+  slug: String
+  title: String
+  text: String
+  link: String
+  media: [editComponentInterviewsMediaInput]
+  schedule: editComponentCommonScheduleInput
+  actions: editComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createSocialCommunityInput {
+  data: SocialCommunityInput
+}
+
+type createSocialCommunityPayload {
+  socialCommunity: SocialCommunities
+}
+
+input updateSocialCommunityInput {
+  where: InputID
+  data: editSocialCommunityInput
+}
+
+type updateSocialCommunityPayload {
+  socialCommunity: SocialCommunities
+}
+
+input deleteSocialCommunityInput {
+  where: InputID
+}
+
+type deleteSocialCommunityPayload {
+  socialCommunity: SocialCommunities
+}
+
+type SuccessStories {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  quote: [ComponentSuccessStoriesQuote]
+  slug: String
+  profile: ComponentCommonProfile
+  schedule: ComponentCommonSchedule
+  stream: String
+  actions: ComponentCommonActions
+  published_at: DateTime
+}
+
+type SuccessStoriesConnection {
+  values: [SuccessStories]
+  groupBy: SuccessStoriesGroupBy
+  aggregate: SuccessStoriesAggregator
+}
+
+type SuccessStoriesAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type SuccessStoriesGroupBy {
+  id: [SuccessStoriesConnectionId]
+  created_at: [SuccessStoriesConnectionCreated_at]
+  updated_at: [SuccessStoriesConnectionUpdated_at]
+  slug: [SuccessStoriesConnectionSlug]
+  profile: [SuccessStoriesConnectionProfile]
+  schedule: [SuccessStoriesConnectionSchedule]
+  stream: [SuccessStoriesConnectionStream]
+  actions: [SuccessStoriesConnectionActions]
+  published_at: [SuccessStoriesConnectionPublished_at]
+}
+
+type SuccessStoriesConnectionId {
+  key: ID
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionCreated_at {
+  key: DateTime
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionUpdated_at {
+  key: DateTime
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionSlug {
+  key: String
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionProfile {
+  key: ID
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionSchedule {
+  key: ID
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionStream {
+  key: String
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionActions {
+  key: ID
+  connection: SuccessStoriesConnection
+}
+
+type SuccessStoriesConnectionPublished_at {
+  key: DateTime
+  connection: SuccessStoriesConnection
+}
+
+input SuccessStoryInput {
+  quote: [ComponentSuccessStoriesQuoteInput]
+  slug: String
+  profile: ComponentCommonProfileInput
+  schedule: ComponentCommonScheduleInput
+  stream: String
+  actions: ComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editSuccessStoryInput {
+  quote: [editComponentSuccessStoriesQuoteInput]
+  slug: String
+  profile: editComponentCommonProfileInput
+  schedule: editComponentCommonScheduleInput
+  stream: String
+  actions: editComponentCommonActionInput
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createSuccessStoryInput {
+  data: SuccessStoryInput
+}
+
+type createSuccessStoryPayload {
+  successStory: SuccessStories
+}
+
+input updateSuccessStoryInput {
+  where: InputID
+  data: editSuccessStoryInput
+}
+
+type updateSuccessStoryPayload {
+  successStory: SuccessStories
+}
+
+input deleteSuccessStoryInput {
+  where: InputID
+}
+
+type deleteSuccessStoryPayload {
+  successStory: SuccessStories
+}
+
+type Testimonial {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  slug: String
+  description: String!
+  startDate: Date
+  endDate: Date
+  updatedBy: String!
+  designation: String
+  publishDate: Date
+  name: String!
+  url: String
+  software: String
+  avatar: String
+  rating: Int
+  published_at: DateTime
+}
+
+type TestimonialConnection {
+  values: [Testimonial]
+  groupBy: TestimonialGroupBy
+  aggregate: TestimonialAggregator
+}
+
+type TestimonialAggregator {
+  count: Int
+  totalCount: Int
+  sum: TestimonialAggregatorSum
+  avg: TestimonialAggregatorAvg
+  min: TestimonialAggregatorMin
+  max: TestimonialAggregatorMax
+}
+
+type TestimonialAggregatorSum {
+  rating: Float
+}
+
+type TestimonialAggregatorAvg {
+  rating: Float
+}
+
+type TestimonialAggregatorMin {
+  rating: Float
+}
+
+type TestimonialAggregatorMax {
+  rating: Float
+}
+
+type TestimonialGroupBy {
+  id: [TestimonialConnectionId]
+  created_at: [TestimonialConnectionCreated_at]
+  updated_at: [TestimonialConnectionUpdated_at]
+  slug: [TestimonialConnectionSlug]
+  description: [TestimonialConnectionDescription]
+  startDate: [TestimonialConnectionStartDate]
+  endDate: [TestimonialConnectionEndDate]
+  updatedBy: [TestimonialConnectionUpdatedBy]
+  designation: [TestimonialConnectionDesignation]
+  publishDate: [TestimonialConnectionPublishDate]
+  name: [TestimonialConnectionName]
+  url: [TestimonialConnectionUrl]
+  software: [TestimonialConnectionSoftware]
+  avatar: [TestimonialConnectionAvatar]
+  rating: [TestimonialConnectionRating]
+  published_at: [TestimonialConnectionPublished_at]
+}
+
+type TestimonialConnectionId {
+  key: ID
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionCreated_at {
+  key: DateTime
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionUpdated_at {
+  key: DateTime
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionSlug {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionDescription {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionStartDate {
+  key: ID
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionEndDate {
+  key: ID
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionUpdatedBy {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionDesignation {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionPublishDate {
+  key: ID
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionName {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionUrl {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionSoftware {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionAvatar {
+  key: String
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionRating {
+  key: Int
+  connection: TestimonialConnection
+}
+
+type TestimonialConnectionPublished_at {
+  key: DateTime
+  connection: TestimonialConnection
+}
+
+input TestimonialInput {
+  slug: String
+  description: String!
+  startDate: Date
+  endDate: Date
+  updatedBy: String!
+  designation: String
+  publishDate: Date
+  name: String!
+  url: String
+  software: String
+  avatar: String
+  rating: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTestimonialInput {
+  slug: String
+  description: String
+  startDate: Date
+  endDate: Date
+  updatedBy: String
+  designation: String
+  publishDate: Date
+  name: String
+  url: String
+  software: String
+  avatar: String
+  rating: Int
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTestimonialInput {
+  data: TestimonialInput
+}
+
+type createTestimonialPayload {
+  testimonial: Testimonial
+}
+
+input updateTestimonialInput {
+  where: InputID
+  data: editTestimonialInput
+}
+
+type updateTestimonialPayload {
+  testimonial: Testimonial
+}
+
+input deleteTestimonialInput {
+  where: InputID
+}
+
+type deleteTestimonialPayload {
+  testimonial: Testimonial
+}
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type ComponentCommonActions {
+  id: ID!
+  autoplay: Boolean
+  like: Boolean
+  share: Boolean
+}
+
+input ComponentCommonActionInput {
+  autoplay: Boolean
+  like: Boolean
+  share: Boolean
+}
+
+input editComponentCommonActionInput {
+  id: ID
+  autoplay: Boolean
+  like: Boolean
+  share: Boolean
+}
+
+type ComponentCommonProfile {
+  id: ID!
+  name: String
+  avatar: String
+  email: String
+  company: String
+  role: String
+  university: String
+}
+
+input ComponentCommonProfileInput {
+  name: String
+  avatar: String
+  email: String
+  company: String
+  role: String
+  university: String
+}
+
+input editComponentCommonProfileInput {
+  id: ID
+  name: String
+  avatar: String
+  email: String
+  company: String
+  role: String
+  university: String
+}
+
+type ComponentCommonSchedule {
+  id: ID!
+  startDate: DateTime
+  endDate: DateTime
+  isPublished: Boolean
+}
+
+input ComponentCommonScheduleInput {
+  startDate: DateTime
+  endDate: DateTime
+  isPublished: Boolean
+}
+
+input editComponentCommonScheduleInput {
+  id: ID
+  startDate: DateTime
+  endDate: DateTime
+  isPublished: Boolean
+}
+
+type ComponentIndustryTrendsHeader {
+  id: ID!
+  title: String
+  content: String
+  link: String
+}
+
+input ComponentIndustryTrendsHeaderInput {
+  title: String
+  content: String
+  link: String
+}
+
+input editComponentIndustryTrendsHeaderInput {
+  id: ID
+  title: String
+  content: String
+  link: String
+}
+
+type ComponentIndustryTrendsMedia {
+  id: ID!
+  imageURL: String
+  videoURL: String
+}
+
+input ComponentIndustryTrendsMediaInput {
+  imageURL: String
+  videoURL: String
+}
+
+input editComponentIndustryTrendsMediaInput {
+  id: ID
+  imageURL: String
+  videoURL: String
+}
+
+type ComponentInterviewsBanner {
+  id: ID!
+  title: String
+  content: String
+  link: String
+}
+
+input ComponentInterviewsBannerInput {
+  title: String
+  content: String
+  link: String
+}
+
+input editComponentInterviewsBannerInput {
+  id: ID
+  title: String
+  content: String
+  link: String
+}
+
+type ComponentInterviewsMedia {
+  id: ID!
+  imageURL: String
+  videoURL: String
+}
+
+input ComponentInterviewsMediaInput {
+  imageURL: String
+  videoURL: String
+}
+
+input editComponentInterviewsMediaInput {
+  id: ID
+  imageURL: String
+  videoURL: String
+}
+
+type ComponentSuccessStoriesQuote {
+  id: ID!
+  title: String
+  description: String
+  imageURL: String
+  rating: Int
+  date: Date
+}
+
+input ComponentSuccessStoriesQuoteInput {
+  title: String
+  description: String
+  imageURL: String
+  rating: Int
+  date: Date
+}
+
+input editComponentSuccessStoriesQuoteInput {
+  id: ID
+  title: String
+  description: String
+  imageURL: String
+  rating: Int
+  date: Date
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Announcement | AnnouncementConnection | AnnouncementAggregator | AnnouncementGroupBy | AnnouncementConnectionId | AnnouncementConnectionCreated_at | AnnouncementConnectionUpdated_at | AnnouncementConnectionDescription | AnnouncementConnectionStartDate | AnnouncementConnectionEndDate | AnnouncementConnectionIsImportant | AnnouncementConnectionIsStarred | AnnouncementConnectionIsCompleted | AnnouncementConnectionIsTrashed | AnnouncementConnectionLang | AnnouncementConnectionTitle | AnnouncementConnectionPublished_at | createAnnouncementPayload | updateAnnouncementPayload | deleteAnnouncementPayload | AnnouncementsTags | AnnouncementsTagsConnection | AnnouncementsTagsAggregator | AnnouncementsTagsGroupBy | AnnouncementsTagsConnectionId | AnnouncementsTagsConnectionCreated_at | AnnouncementsTagsConnectionUpdated_at | AnnouncementsTagsConnectionText | AnnouncementsTagsConnectionValue | AnnouncementsTagsConnectionColor | createAnnouncementsTagPayload | updateAnnouncementsTagPayload | deleteAnnouncementsTagPayload | Faq | FaqConnection | FaqAggregator | FaqGroupBy | FaqConnectionId | FaqConnectionCreated_at | FaqConnectionUpdated_at | FaqConnectionSlug | FaqConnectionContext | FaqConnectionType | FaqConnectionCategory | FaqConnectionQuestion | FaqConnectionAcceptedAnswer | FaqConnectionPublished_at | createFaqPayload | updateFaqPayload | deleteFaqPayload | IndustryTrends | IndustryTrendsConnection | IndustryTrendsAggregator | IndustryTrendsGroupBy | IndustryTrendsConnectionId | IndustryTrendsConnectionCreated_at | IndustryTrendsConnectionUpdated_at | IndustryTrendsConnectionSlug | IndustryTrendsConnectionStream | IndustryTrendsConnectionProfile | IndustryTrendsConnectionBanner | IndustryTrendsConnectionSchedule | IndustryTrendsConnectionActions | IndustryTrendsConnectionPublished_at | createIndustryTrendPayload | updateIndustryTrendPayload | deleteIndustryTrendPayload | Interviews | InterviewsConnection | InterviewsAggregator | InterviewsGroupBy | InterviewsConnectionId | InterviewsConnectionCreated_at | InterviewsConnectionUpdated_at | InterviewsConnectionSlug | InterviewsConnectionStream | InterviewsConnectionBanner | InterviewsConnectionMedia | InterviewsConnectionExpert | InterviewsConnectionSchedule | InterviewsConnectionActions | InterviewsConnectionPublished_at | createInterviewPayload | updateInterviewPayload | deleteInterviewPayload | SocialCommunities | SocialCommunitiesConnection | SocialCommunitiesAggregator | SocialCommunitiesGroupBy | SocialCommunitiesConnectionId | SocialCommunitiesConnectionCreated_at | SocialCommunitiesConnectionUpdated_at | SocialCommunitiesConnectionSlug | SocialCommunitiesConnectionTitle | SocialCommunitiesConnectionText | SocialCommunitiesConnectionLink | SocialCommunitiesConnectionSchedule | SocialCommunitiesConnectionActions | SocialCommunitiesConnectionPublished_at | createSocialCommunityPayload | updateSocialCommunityPayload | deleteSocialCommunityPayload | SuccessStories | SuccessStoriesConnection | SuccessStoriesAggregator | SuccessStoriesGroupBy | SuccessStoriesConnectionId | SuccessStoriesConnectionCreated_at | SuccessStoriesConnectionUpdated_at | SuccessStoriesConnectionSlug | SuccessStoriesConnectionProfile | SuccessStoriesConnectionSchedule | SuccessStoriesConnectionStream | SuccessStoriesConnectionActions | SuccessStoriesConnectionPublished_at | createSuccessStoryPayload | updateSuccessStoryPayload | deleteSuccessStoryPayload | Testimonial | TestimonialConnection | TestimonialAggregator | TestimonialAggregatorSum | TestimonialAggregatorAvg | TestimonialAggregatorMin | TestimonialAggregatorMax | TestimonialGroupBy | TestimonialConnectionId | TestimonialConnectionCreated_at | TestimonialConnectionUpdated_at | TestimonialConnectionSlug | TestimonialConnectionDescription | TestimonialConnectionStartDate | TestimonialConnectionEndDate | TestimonialConnectionUpdatedBy | TestimonialConnectionDesignation | TestimonialConnectionPublishDate | TestimonialConnectionName | TestimonialConnectionUrl | TestimonialConnectionSoftware | TestimonialConnectionAvatar | TestimonialConnectionRating | TestimonialConnectionPublished_at | createTestimonialPayload | updateTestimonialPayload | deleteTestimonialPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentCommonActions | ComponentCommonProfile | ComponentCommonSchedule | ComponentIndustryTrendsHeader | ComponentIndustryTrendsMedia | ComponentInterviewsBanner | ComponentInterviewsMedia | ComponentSuccessStoriesQuote
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  announcement(id: ID!, publicationState: PublicationState): Announcement
+  announcements(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Announcement]
+  announcementsConnection(sort: String, limit: Int, start: Int, where: JSON): AnnouncementConnection
+  announcementsTag(id: ID!, publicationState: PublicationState): AnnouncementsTags
+  announcementsTags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [AnnouncementsTags]
+  announcementsTagsConnection(sort: String, limit: Int, start: Int, where: JSON): AnnouncementsTagsConnection
+  faq(id: ID!, publicationState: PublicationState): Faq
+  faqs(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Faq]
+  faqsConnection(sort: String, limit: Int, start: Int, where: JSON): FaqConnection
+  industryTrend(id: ID!, publicationState: PublicationState): IndustryTrends
+  industryTrends(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [IndustryTrends]
+  industryTrendsConnection(sort: String, limit: Int, start: Int, where: JSON): IndustryTrendsConnection
+  interview(id: ID!, publicationState: PublicationState): Interviews
+  interviews(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Interviews]
+  interviewsConnection(sort: String, limit: Int, start: Int, where: JSON): InterviewsConnection
+  socialCommunity(id: ID!, publicationState: PublicationState): SocialCommunities
+  socialCommunities(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [SocialCommunities]
+  socialCommunitiesConnection(sort: String, limit: Int, start: Int, where: JSON): SocialCommunitiesConnection
+  successStory(id: ID!, publicationState: PublicationState): SuccessStories
+  successStories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [SuccessStories]
+  successStoriesConnection(sort: String, limit: Int, start: Int, where: JSON): SuccessStoriesConnection
+  testimonial(id: ID!, publicationState: PublicationState): Testimonial
+  testimonials(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Testimonial]
+  testimonialsConnection(sort: String, limit: Int, start: Int, where: JSON): TestimonialConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createAnnouncement(input: createAnnouncementInput): createAnnouncementPayload
+  updateAnnouncement(input: updateAnnouncementInput): updateAnnouncementPayload
+  deleteAnnouncement(input: deleteAnnouncementInput): deleteAnnouncementPayload
+  createAnnouncementsTag(input: createAnnouncementsTagInput): createAnnouncementsTagPayload
+  updateAnnouncementsTag(input: updateAnnouncementsTagInput): updateAnnouncementsTagPayload
+  deleteAnnouncementsTag(input: deleteAnnouncementsTagInput): deleteAnnouncementsTagPayload
+  createFaq(input: createFaqInput): createFaqPayload
+  updateFaq(input: updateFaqInput): updateFaqPayload
+  deleteFaq(input: deleteFaqInput): deleteFaqPayload
+  createIndustryTrend(input: createIndustryTrendInput): createIndustryTrendPayload
+  updateIndustryTrend(input: updateIndustryTrendInput): updateIndustryTrendPayload
+  deleteIndustryTrend(input: deleteIndustryTrendInput): deleteIndustryTrendPayload
+  createInterview(input: createInterviewInput): createInterviewPayload
+  updateInterview(input: updateInterviewInput): updateInterviewPayload
+  deleteInterview(input: deleteInterviewInput): deleteInterviewPayload
+  createSocialCommunity(input: createSocialCommunityInput): createSocialCommunityPayload
+  updateSocialCommunity(input: updateSocialCommunityInput): updateSocialCommunityPayload
+  deleteSocialCommunity(input: deleteSocialCommunityInput): deleteSocialCommunityPayload
+  createSuccessStory(input: createSuccessStoryInput): createSuccessStoryPayload
+  updateSuccessStory(input: updateSuccessStoryInput): updateSuccessStoryPayload
+  deleteSuccessStory(input: deleteSuccessStoryInput): deleteSuccessStoryPayload
+  createTestimonial(input: createTestimonialInput): createTestimonialPayload
+  updateTestimonial(input: updateTestimonialInput): updateTestimonialPayload
+  deleteTestimonial(input: deleteTestimonialInput): deleteTestimonialPayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

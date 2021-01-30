@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "social_communities",
+  "info": {
+    "name": "Social-Communities",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "link": {
+      "type": "string"
+    },
+    "media": {
+      "type": "component",
+      "repeatable": true,
+      "component": "interviews.media"
+    },
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.schedule"
+    },
+    "actions": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.actions"
+    },
+    "priority": {
+      "type": "integer",
+      "unique": true
+    }
+  }
+}
